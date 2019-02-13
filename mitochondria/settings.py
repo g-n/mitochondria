@@ -2,8 +2,16 @@ import os
 import django_heroku
 import dj_database_url
 
-django_heroku.settings(locals())
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+django_heroku.settings(locals())
+
 SECRET_KEY = 'k@9u61ihscqu)04%vs12u@s@)t8%i)ra%h!yoir2qq3y^sby^2'
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -62,8 +70,3 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
