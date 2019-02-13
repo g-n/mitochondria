@@ -1,9 +1,14 @@
 import os
+import django_heroku
+import dj_database_url
 
+django_heroku.settings(locals())
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'k@9u61ihscqu)04%vs12u@s@)t8%i)ra%h!yoir2qq3y^sby^2'
 DEBUG = True
 ALLOWED_HOSTS = []
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -13,8 +18,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'teacher.apps.TeacherConfig',
-
 ]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -24,7 +29,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 ROOT_URLCONF = 'mitochondria.urls'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -40,17 +47,9 @@ TEMPLATES = [
         },
     }
 ]
+
 WSGI_APPLICATION = 'mitochondria.wsgi.application'
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['PG_DATABASE'],
-        'USER': os.environ['PG_USER'],
-        'PASSWORD': os.environ['PG_PASSWORD'],
-        'HOST': os.environ['PG_HOST'],
-        'PORT': os.environ['PG_PORT'],
-    }
-}
+DATABASES = dict(default=dj_database_url.config())
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
