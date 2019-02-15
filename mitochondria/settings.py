@@ -1,6 +1,7 @@
-import os
 import dj_database_url
-
+from urllib.parse import urlparse,urlsplit
+import os
+import sys
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -57,8 +58,29 @@ TEMPLATES = [
     }
 ]
 
+
+
 WSGI_APPLICATION = 'mitochondria.wsgi.application'
-DATABASES = dict(default=dj_database_url.config(engine='postgres'))
+
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+        }
+    }
+else:
+    default_db_url = urlparse(os.environ['DATABASE_URL'])
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': default_db_url.path[1:].replace('/', ''),
+            'USER': default_db_url.username,
+            'PASSWORD': default_db_url.password,
+            'HOST': default_db_url.hostname,
+            'PORT': default_db_url.port,
+        },
+    }
+
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -73,5 +95,5 @@ USE_L10N = True
 USE_TZ = True
 
 import django_heroku
-django_heroku.settings(locals())
+django_heroku.settings(locals(), databases=False)
 

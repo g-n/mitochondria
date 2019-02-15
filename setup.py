@@ -12,4 +12,5 @@ setuptools.setup(
         'django-heroku',
         'dj-database-url',
     ],
+    zip_safe=False,
 )
