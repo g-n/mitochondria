@@ -1,0 +1,18 @@
+  [
+      {
+          "model": "teacher.student",
+          "pk": 1,
+          "fields": {
+              "first_name": "bobby",
+              "last_name": "baggins"
+          }
+      },
+      {
+          "model": "teacher.student",
+          "pk": 2,
+          "fields": {
+              "first_name": "billy",
+              "last_name": "the_chillin"
+          }
+      }
+  ]

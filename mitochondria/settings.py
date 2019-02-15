@@ -1,4 +1,3 @@
-import dj_database_url
 from urllib.parse import urlparse,urlsplit
 import os
 import sys
@@ -27,8 +26,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'teacher.apps.TeacherConfig',
+    'frontend',
+    'django_tables2',
 ]
-
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -53,6 +54,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ]
         },
     }

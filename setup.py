@@ -10,7 +10,7 @@ setuptools.setup(
         'psycopg2',
         'gunicorn',
         'django-heroku',
-        'dj-database-url',
+        'django_tables2',
     ],
     zip_safe=False,
 )

@@ -1,0 +1,15 @@
+body {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+}
+
+section {
+   grid-column: 2/4;
+}
+
+.student {
+   font-size:40px;
+   width: 100%;
+   color: green;
+}

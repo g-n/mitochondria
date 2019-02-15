@@ -13,17 +13,23 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ('url', 'name')
 
-class StudentSerializer(serializers.Serializer):
-    first_name = serializers.CharField(max_length=30)
-    last_name = serializers.CharField(max_length=30)
-    nick = serializers.CharField(required=False, max_length=30, allow_blank=True)
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = '__all__'
 
-    def create(self, validated_data):
-        return Student.objects.create(**validated_data)
 
-    def update(self, instance, validated_data):
-        instance.first_name = validated_data.get('first_name', instance.first_name)
-        instance.last_name = validated_data.get('last_name', instance.last_name)
-        instance.nick = validated_data.get('nick', instance.nick)
-        instance.save()
-        return instance
+# class StudentSerializer(serializers.Serializer):
+#     first_name = serializers.CharField(max_length=30)
+#     last_name = serializers.CharField(max_length=30)
+#     nick = serializers.CharField(required=False, max_length=30, allow_blank=True)
+#
+#     def create(self, validated_data):
+#         return Student.objects.create(**validated_data)
+#
+#     def update(self, instance, validated_data):
+#         instance.first_name = validated_data.get('first_name', instance.first_name)
+#         instance.last_name = validated_data.get('last_name', instance.last_name)
+#         instance.nick = validated_data.get('nick', instance.nick)
+#         instance.save()
+#         return instance
