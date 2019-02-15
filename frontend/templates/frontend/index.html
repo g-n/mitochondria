@@ -12,7 +12,14 @@
   </head>
   <body>
   <section class="section">
+      <a href="api/"> REST api here</a>
       {% render_table student %}
+       <form action="api/student/" method="post">
+        First name: <input type="text" name="first_name"><br>
+        Last name: <input type="text" name="last_name"><br>
+        <input type="submit" value="Submit">
+    </form>
+
   </section>
   </body>
 </html>
