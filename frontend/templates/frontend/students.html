@@ -1,0 +1,64 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+{% load render_table from django_tables2 %}
+{% block content %}
+    <div class="container">
+        <div class="columns ">
+            <div class="column is-3 ">
+                <aside class="menu is-hidden-mobile">
+                    <p class="menu-label"  href="{% url 'teacher' %}">Teacher</p>
+                    <ul class="menu-list">
+                        <li><a class="is-active" href="{% url 'teacher' %}">Student List</a></li>
+                        <p class="menu-label">Other</p>
+                        <li><a>Customers</a></li>
+                        <li><a href=""> Documentation</a></li>
+                        <li><a href="/api/"> REST API</a></li>
+                    </ul>
+                </aside>
+            </div>
+            <nav class="column is-9">
+                <section class="hero is-info welcome is-small" style="margin-bottom: 5%;">
+                    <div class="hero-body">
+                        <h1 class="title" style="font-size: 40px">Hello</h1>
+                    </div>
+                </section>
+                <div class="tile is-ancestor">
+                    <div class="tile is-6 is-vertical is-parent">
+                        <div class="tile is-child box">
+                              <p class="control">
+                            <p class="title">Add Student</p>
+                             <form action="/students/" method="post">
+                            <label class="label">First name</label>
+                            <input class="input" type="text" name="first_name"><br>
+                            <label class="label">Last name</label>
+                            <input class="input" type="text" name="last_name"><br>
+                            <div class="level-right" >
+{#                            <a class="button is-link" href="base.html">#}
+{#                                </a>#}
+{#                                <input type="submit">#}
+                                <button class="button is-success" id="student_button" type="submit">Button</button>
+
+                            </div>
+                             </form>
+                        </div>
+                        <div class="tile is-child box">
+{#                            <p class="title"></p>#}
+                        </div>
+                    </div>
+                <div class="tile is-parent">
+                      <article class="tile is-child box">
+                        <img src="{% static 'frontend/asd.jpg' %}" alt="woop">
+                      </article>
+                    </div>
+                </div>
+                {% render_table student %}
+
+
+            </nav>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+

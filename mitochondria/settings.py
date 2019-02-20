@@ -16,7 +16,6 @@ SECRET_KEY = 'k@9u61ihscqu)04%vs12u@s@)t8%i)ra%h!yoir2qq3y^sby^2'
 DEBUG = True
 ALLOWED_HOSTS = []
 
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -25,17 +24,26 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'teacher.apps.TeacherConfig',
+    # 'teacher.apps.TeacherConfig',
     'frontend',
+    'teacher',
     'django_tables2',
 ]
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [os.environ['REDIS_URL']],
+        },
+    },
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -97,3 +105,6 @@ USE_TZ = True
 import django_heroku
 django_heroku.settings(locals(), databases=False)
 
+
+
+# print(open('.gitignore').read())

@@ -12,5 +12,4 @@ setuptools.setup(
         'django-heroku',
         'django_tables2',
     ],
-    zip_safe=False,
 )

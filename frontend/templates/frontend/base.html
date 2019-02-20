@@ -1,0 +1,18 @@
+{% load static %}
+{% include "frontend/navbar.html"  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Runner Game</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'frontend/stylesheet.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontend/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontend/fontawesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'frontend/normalize.css' %}">
+</head>
+<body>
+
+{% block navbar %}{% block content %}
+{% endblock %}{% endblock %}
+</body>
+</html>
