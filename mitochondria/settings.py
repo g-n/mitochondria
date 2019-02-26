@@ -26,15 +26,6 @@ INSTALLED_APPS = [
     'frontend',
     'teacher',
 ]
-DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [os.environ['REDIS_URL']],
-        },
-    },
-}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
