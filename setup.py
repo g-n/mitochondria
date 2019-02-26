@@ -10,6 +10,5 @@ setuptools.setup(
         'psycopg2',
         'gunicorn',
         'django-heroku',
-        'django_tables2',
     ],
 )

@@ -23,10 +23,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # 'teacher.apps.TeacherConfig',
     'frontend',
     'teacher',
-    'django_tables2',
 ]
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
 CHANNEL_LAYERS = {
