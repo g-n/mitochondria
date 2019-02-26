@@ -11,7 +11,6 @@ STATICFILES_DIRS = [
 ]
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
 SECRET_KEY = 'k@9u61ihscqu)04%vs12u@s@)t8%i)ra%h!yoir2qq3y^sby^2'
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -104,7 +103,3 @@ USE_TZ = True
 
 import django_heroku
 django_heroku.settings(locals(), databases=False)
-
-
-
-# print(open('.gitignore').read())

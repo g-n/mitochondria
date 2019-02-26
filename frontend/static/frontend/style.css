@@ -6,8 +6,16 @@ table {
   width: 100%;
 }
 
-table tr{
-  font-size: 2em;
+#names {
+  margin-bottom: 3%;
+}
+
+#blocks {
+  font-size: 150%;
+}
+
+#blocks:hover  {
+  background-color: #f9f9f9;
 }
 
 @font-face {

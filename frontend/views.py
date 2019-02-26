@@ -13,19 +13,27 @@ def index(request):
     return render(request, 'frontend/index.html', {'student': table})
 
 def student_page(request):
-    queryset = User.objects.all()
     serializer_class = Student
-
-    if request.method == 'GET':
-        table = StudentTable(Student.objects.all(), exclude='id')
-        RequestConfig(request).configure(table)
-        return render(request, 'frontend/students.html', {'student': table})
-
     if request.method == 'POST':
         serializer = StudentSerializer(data=request.POST)
+        print('fucky')
+
         if serializer.is_valid():
-            studen = Student.objects.create(**serializer.data)
-            studen.save()
-        table = StudentTable(Student.objects.all(), exclude='id')
-        RequestConfig(request).configure(table)
-        return render(request, 'frontend/students.html', {'student': table})
+            if request.POST['do']== 'add':
+                studen = Student.objects.create(**serializer.data)
+                studen.save()
+        try:
+            if request.POST['do'] == 'drop':
+                s = Student.objects.get(id=request.POST['id'])
+                print(s)
+                s.delete()
+                # s.save()
+        except Exception as e:
+            print('error')
+
+
+    # table = StudentTable(Student.objects.all(), exclude='id', order_by='last_name', )
+    # RequestConfig(request).configure(table)
+    # return render(request, 'frontend/students.html', {'student': table})
+    queryset = Student.objects.all().order_by('last_name','first_name')
+    return render(request, 'frontend/students.html', {'student': queryset})
