@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from teacher.serializers import UserSerializer, GroupSerializer
-from teacher.serializers import StudentSerializer
-from teacher.models import Student
+from teacher.serializers import StudentSerializer, ProblemSetSerializer, ProblemSerializer
+from teacher.models import Student, ProblemSet, Problem
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -18,4 +18,12 @@ class GroupViewSet(viewsets.ModelViewSet):
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+
+class ProblemSetViewSet(viewsets.ModelViewSet):
+    queryset = ProblemSet.objects.all()
+    serializer_class = ProblemSetSerializer
+
+class ProblemViewSet(viewsets.ModelViewSet):
+    queryset = Problem.objects.all()
+    serializer_class = ProblemSerializer
 

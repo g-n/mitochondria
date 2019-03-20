@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from teacher.models import Student
+from teacher.models import Student, Problem, ProblemSet
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -16,6 +16,17 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
+        fields = '__all__'
+
+
+class ProblemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Problem
+        fields = '__all__'
+
+class ProblemSetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProblemSet
         fields = '__all__'
 
 
