@@ -1,0 +1,64 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="row">
+  <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">
+            <span data-feather="home"></span>
+            First Grade <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <p class="menu-label">Problem Sets</p>
+        <li><a href="">Simple Addition 1</a></li>
+        <p class="menu-label">Other</p>
+        <li><a href=""> Documentation</a></li>
+        <li><a href="/api/"> REST API</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <h2>Student List</h2>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+          </thead>
+          <tbody>
+            {% for s in student %}
+            <tr>
+              <td>{{ s.id }}</td>
+              <td>{{ s.first_name }}</td>
+              <td>{{ s.last_name }}</td>
+              <td><a href="{% url 'students' %}{{ s.id }}">View</a></td>
+              <td>
+                <form action="{% url 'students' %}" method="post" style="display: inline; margin: 0; padding: 0;">
+                  <input type="hidden" class="input" name="id" value={{s.id}}>
+                  <input type="hidden" name="do" value="drop">
+                  <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <a class="btn btn-primary" href="{% url 'students' %}">Add student</a>
+    </div>
+  </main>
+</div>
+{% else %}
+  <p>You are not logged in</p>
+{% endif %}
+
+{% endblock %}
