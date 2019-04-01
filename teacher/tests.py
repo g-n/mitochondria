@@ -1,6 +1,6 @@
 from django.test import TestCase, override_settings, TransactionTestCase, Client
 import requests
-from .models import Student
+# from .models import Student
 
 class TeacherTest(TestCase):
     def test_working_db(self):

@@ -1,72 +1,68 @@
 {% extends "frontend/base.html" %}
 {% load static %}
 {% block content %}
-    <div class="columns ">
-        <div class="column is-3 ">
-            <aside class="menu is-hidden-mobile">
-                <p class="menu-label" href="{% url 'teacher' %}">Class</p>
-                <ul class="menu-list">
-                    <li><a class="is-active" href="{% url 'teacher' %}">First Grade</a></li>
-                    <p class="menu-label">Problem Sets</p>
-                    <li><a href="">Simple Addition 1</a></li>
-                    <p class="menu-label">Other</p>
-                    <li><a href=""> Documentation</a></li>
-                    <li><a href="/api/"> REST API</a></li>
-                </ul>
-            </aside>
-        </div>
-        <nav class="column is-9">
-            <section>
-                <div class="tile is-ancestor">
-                    <div class="tile is-6 is-vertical is-parent">
-                        <div class="tile is-child box">
-                            <p class="control">
-                            <p class="title">Add Student</p>
-                            <form action="{% url 'teacher' %}" method="post">
-                                <label class="label">First name</label>
-                                <input class="input" type="text" name="first_name"><br>
-                                <label class="label">Last name</label>
-                                <input class="input" type="text" name="last_name"><br>
-                                <input type="hidden" name="do" value="add">
-                                <div class="level-right">
-                                    <button class="button is-success" id="student_button" type="submit" style="margin-top: 1em;padding-bottom: 0">Submit</button>
 
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="tile is-parent">
-                        <article class="tile is-child box">
-                            <img src="{% static 'frontend/asd.jpg' %}" alt="woop">
-                        </article>
-                    </div>
-                </div>
-                <div class="tile is-parent is-vertical">
-
-                    {% for s in student %}
-                        <div class="tile is-ancestor is-vertical" id="names">
-                            <div class="tile is-parent box is-horizontal" id="blocks">
-
-                                <div class="tile level-left">{{ s.first_name }} </div>
-                                <div class="tile ">{{ s.last_name }} </div>
-                                <div class="tile level-right">
-                                    <a class="button is-link" style="margin-right: 0.5em"
-                                       href="{% url 'teacher' %}{{ s.id }}">profile<i style="margin-left: 0.2em" class="fas  fa-portrait"></i></a>
-                                    <form action="{% url 'teacher' %}" method="post"
-                                          style="display: inline; margin: 0; padding: 0;">
-                                        <input type="hidden" class="input" name="id" value={{ s.id }}><input
-                                            type="hidden" name="do" value="drop">
-                                        <button class="button is-danger"><i class="fas fa-times"> </i></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </section>
-        </nav>
+{% if user.is_authenticated %}
+<div class="row">
+  <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">
+            First Grade
+          </a>
+        </li>
+        <p class="menu-label">Problem Sets</p>
+        <li><a href="">Simple Addition 1</a></li>
+        <p class="menu-label">Other</p>
+        <li><a href=""> Documentation</a></li>
+        <li><a href="/api/"> REST API</a></li>
+      </ul>
     </div>
+  </nav>
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Add Student</h2>
+        <div class="card flex-md-row mb-4">
+          <form action="{% url 'teacher' %}" method="post">
+            <div class="form-group mt-2">
+
+                <div class="col-sm-10">
+                  <label for="firstName">First Name</label>
+                  <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+                </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-10">
+                <label for="LastName">Last Name</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-10">
+                <input type="hidden" name="do" value="add">
+                <button type="submit" id="student_button" class="btn btn-primary">Add</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card flex-md-row mb-4">
+          <!-- <img class="img-fluid" src="{% static 'frontend/asd.jpg' %}" alt="woop"> -->
+          <img class="img-fluid" src="http://cdn.shopify.com/s/files/1/0257/6087/products/Pikachu_Single_Front_dc998741-c845-43a8-91c9-c1c97bec17a4.png?v=1523938908" alt="woop">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <a class="btn btn-primary" href="{% url 'teacher' %}">Back</a>
+    </div>
+  </main>
+</div>
+
+{% else %}
+  <p>You are not logged in</p>
+{% endif %}
 {% endblock %}
-
-
-
