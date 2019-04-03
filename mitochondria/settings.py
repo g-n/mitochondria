@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'frontend',
     'teacher',
+    'students',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -92,3 +93,6 @@ USE_TZ = True
 
 import django_heroku
 django_heroku.settings(locals(), databases=False)
+
+LOGIN_REDIRECT_URL = 'teacher'
+LOGOUT_REDIRECT_URL = 'login'
