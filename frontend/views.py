@@ -22,7 +22,7 @@ def teacher_page(request):
             if request.POST['do'] == 'drop':
                 t = Student.objects.get(url=request.POST['id'])
                 t.delete()
-                print('dropped',  t.id, t.first_name, t.last_name)
+                print('dropped',  t.id, t.first_name, t.last_name, t.username)
         except Exception as e:
             print('cant drop student')
 
