@@ -1,0 +1,11 @@
+.idea
+.vscode
+__pycache__
+build
+dist
+MANIFEST
+*.egg-info
+.env
+*.meta
+db.sqlite3
+.pytest_cache
