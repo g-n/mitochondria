@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from urllib.parse import urlparse
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -121,3 +123,18 @@ USE_TZ = True
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 STATIC_URL = "/static/"
+
+default_db_url = urlparse(os.environ["DATABASE_URL"])
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": default_db_url.path[1:].replace("/", ""),
+        "USER": default_db_url.username,
+        "PASSWORD": default_db_url.password,
+        "HOST": default_db_url.hostname,
+        "PORT": default_db_url.port,
+    }
+}
+import django_heroku
+
+django_heroku.settings(locals(), databases=False)
