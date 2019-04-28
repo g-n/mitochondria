@@ -57,7 +57,9 @@ TEMPLATES = [
 WSGI_APPLICATION = "mitochondria.wsgi.application"
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+    },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
@@ -84,18 +86,19 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 STATIC_URL = "/static/"
 
-DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": os.path.join(BASE_DIR, "db.sqlite3")}}
-# default_db_url = urlparse(os.environ["DATABASE_URL"])
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": default_db_url.path[1:].replace("/", ""),
-#         "USER": default_db_url.username,
-#         "PASSWORD": default_db_url.password,
-#         "HOST": default_db_url.hostname,
-#         "PORT": default_db_url.port,
-#     }
-# }
-# import django_heroku
+# DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": os.path.join(BASE_DIR, "db.sqlite3")}}
+default_db_url = urlparse(os.environ["DATABASE_URL"])
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": default_db_url.path[1:].replace("/", ""),
+        "USER": default_db_url.username,
+        "PASSWORD": default_db_url.password,
+        "HOST": default_db_url.hostname,
+        "PORT": default_db_url.port,
+    }
+}
+import django_heroku
+
 #
-# django_heroku.settings(locals(), databases=False)
+django_heroku.settings(locals(), databases=False)

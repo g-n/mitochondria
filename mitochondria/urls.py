@@ -7,7 +7,9 @@ from rest_framework import permissions
 
 
 schema_view = get_schema_view(
-    openapi.Info(title="Math Mart 3 API", default_version="v1"), public=True, permission_classes=(permissions.AllowAny,)
+    openapi.Info(title="Math Mart 3 API", default_version="v1"),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
 )
 
 

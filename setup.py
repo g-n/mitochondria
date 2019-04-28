@@ -5,8 +5,8 @@ setuptools.setup(
     python_requires=">=3.7",
     install_requires=[
         "django",
-        'drf_yasg',
-        'openapi',
+        "drf_yasg",
+        "openapi",
         "djangorestframework",
         "psycopg2",
         "gunicorn",

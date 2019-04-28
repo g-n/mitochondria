@@ -7,7 +7,12 @@ from rest_framework.response import Response
 from teacher.authentication import ExampleAuthentication
 from .models import Student, Game, ProblemSet, Class
 
-from .serializers import ClassesSerializer, StudentSerializer, ProblemSetSerializer, GameSerializer
+from .serializers import (
+    ClassesSerializer,
+    StudentSerializer,
+    ProblemSetSerializer,
+    GameSerializer,
+)
 
 from .filters import IsOwnerFilterBackend
 from .permissions import IsOwnerOfObject
@@ -23,7 +28,11 @@ class BaseTeacherView(
 ):
     permission_classes = (IsAdminUser | IsOwnerOfObject,)
     filter_backends = (IsOwnerFilterBackend,)
-    authentication_classes = (BasicAuthentication,SessionAuthentication, ExampleAuthentication)
+    authentication_classes = (
+        BasicAuthentication,
+        SessionAuthentication,
+        ExampleAuthentication,
+    )
 
 
 class StudentViewSet(BaseTeacherView):
@@ -42,9 +51,6 @@ class GameViewSet(BaseTeacherView):
     queryset = Game.objects.all()
     serializer_class = GameSerializer
     lookup_field = "student"
-
-    # def list(self, request, **kwargs):
-    #     return Response(self.get_queryset().values("problemset"))
 
 
 class ProblemSetViewSet(BaseTeacherView):
