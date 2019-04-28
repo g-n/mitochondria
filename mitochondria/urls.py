@@ -17,6 +17,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
     path("", include("teacher.urls")),
-    path("api/", schema_view.with_ui("swagger", cache_timeout=0)),
+    path("api/", schema_view.with_ui("swagger", cache_timeout=0), name="api"),
     path("accounts/", include("django.contrib.auth.urls")),
 ]
