@@ -97,13 +97,13 @@ class Command(BaseCommand):
             ).save()
 
         big_number = ProblemSet.objects.create(set_name="large numbers", user=u1)
-        easy_addition.save()
+        big_number.save()
         for _ in range(15):
             Problem.objects.create(
-                set_name=easy_addition, **self.gen_problem(500, 100)
+                set_name=big_number, **self.gen_problem(500, 100)
             ).save()
 
-        self.make_classroom(u1, "first grade", [easy_addition])
+        self.make_classroom(u1, "first grade", [easy_addition, big_number])
         self.make_classroom(u1, "second grade", [easy_addition, big_number])
 
         # Problem.objects.create(target="1+_=2", correct="1", incorrect="2", set_name=easy_addition).save()

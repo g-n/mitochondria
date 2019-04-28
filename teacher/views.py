@@ -56,5 +56,5 @@ class ProblemSetViewSet(BaseTeacherView):
     serializer_class = ProblemSetSerializer
     lookup_field = "set_name"
 
-    def list(self, request, **kwargs):
-        return Response(self.get_queryset().values_list(self.lookup_field, flat=True))
+    # def list(self, request, **kwargs):
+    #     return Response(self.get_queryset().values_list(self.lookup_field, flat=True))

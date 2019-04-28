@@ -14,7 +14,7 @@ class ProblemSetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProblemSet
-        fields = ("user", "set_name", "problems")
+        fields = ("user", "set_name", "problems", "id")
 
 
 class GameSerializer(serializers.ModelSerializer):
@@ -22,7 +22,7 @@ class GameSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Game
-        fields = ("problemset_name", "date", "score")
+        fields = ("problemset_name", "date", "score", "problemset", "student")
 
 
 class StudentSerializer(serializers.ModelSerializer):
