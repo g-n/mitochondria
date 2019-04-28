@@ -4,7 +4,6 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.response import Response
 
-from teacher.authentication import ExampleAuthentication
 from .models import Student, Game, ProblemSet, Class
 
 from .serializers import (
@@ -31,7 +30,6 @@ class BaseTeacherView(
     authentication_classes = (
         BasicAuthentication,
         SessionAuthentication,
-        ExampleAuthentication,
     )
 
 
