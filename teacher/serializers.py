@@ -30,7 +30,7 @@ class StudentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Student
-        fields = ("first_name", "last_name", "scores")
+        fields = ("first_name", "last_name", "scores", "id")
 
 
 class ClassesSerializer(serializers.ModelSerializer):

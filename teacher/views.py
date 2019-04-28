@@ -1,8 +1,10 @@
 from rest_framework import mixins
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAdminUser
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.response import Response
 
+from teacher.authentication import ExampleAuthentication
 from .models import Student, Game, ProblemSet, Class
 
 from .serializers import ClassesSerializer, StudentSerializer, ProblemSetSerializer, GameSerializer
@@ -21,12 +23,13 @@ class BaseTeacherView(
 ):
     permission_classes = (IsAdminUser | IsOwnerOfObject,)
     filter_backends = (IsOwnerFilterBackend,)
+    authentication_classes = (BasicAuthentication,SessionAuthentication, ExampleAuthentication)
 
 
 class StudentViewSet(BaseTeacherView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
-    lookup_field = "classroom"
+    # lookup_field = "classroom"
 
 
 class ClassesViewSet(BaseTeacherView):
@@ -40,8 +43,8 @@ class GameViewSet(BaseTeacherView):
     serializer_class = GameSerializer
     lookup_field = "student"
 
-    def list(self, request, **kwargs):
-        return Response(self.get_queryset().values("problemset"))
+    # def list(self, request, **kwargs):
+    #     return Response(self.get_queryset().values("problemset"))
 
 
 class ProblemSetViewSet(BaseTeacherView):
