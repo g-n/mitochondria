@@ -10,6 +10,7 @@ setuptools.setup(
         "djangorestframework",
         "psycopg2",
         "gunicorn",
+        "pandas",
         "django-heroku",
         "pytest",
     ],

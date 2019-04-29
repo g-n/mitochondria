@@ -1,13 +1,9 @@
 from django.contrib import admin
 from django.shortcuts import render
 from django.urls import path, include
-from django.views.generic import TemplateView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
-import requests
-import pandas as pd
-from teacher import models
 import pandas as pd
 
 from teacher import models
@@ -17,8 +13,6 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.IsAuthenticated,),
 )
-
-
 
 def index(request):
     if not request.user.is_anonymous:
@@ -45,7 +39,6 @@ def index(request):
         df = pd.DataFrame(seta, columns=['Class', 'First', 'Last', 'Problemset', '# total', 'Score','%', 'Date'])
         df = df\
             .sort_values(['Class','Problemset','Last','Date'])
-            # .set_index(['class', 'problemset', 'first_name', 'last_name',  'date', ])
 
         pa = []
         for x in problemsets:
@@ -53,7 +46,6 @@ def index(request):
                 pa.append([x.set_name, y.target, y.correct, y.incorrect])
         sf = pd.DataFrame(pa, columns=['Problemset','Target','Correct','Incorrect'])\
             .sort_values(['Problemset'])\
-            # .set_index('problem_set'])
         context = {
         'scores':df.to_html(index=False, classes=["table-striped"],),
         'problems':sf.to_html(index=False, classes=["table-striped"])
