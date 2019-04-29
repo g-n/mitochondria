@@ -43,7 +43,7 @@ class GameViewSet(BaseTeacherView):
     lookup_field = "student"
 
 
-class ProblemSetViewSet(BaseTeacherView):
+class ProblemSetViewSet(BaseTeacherView,mixins.RetrieveModelMixin):
     queryset = ProblemSet.objects.all()
     serializer_class = ProblemSetSerializer
     lookup_field = "set_name"
