@@ -14,9 +14,9 @@ from .permissions import IsOwnerOfObject
 
 class BaseTeacherView(
     mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
-    mixins.UpdateModelMixin,
-    mixins.DestroyModelMixin,
+    # mixins.RetrieveModelMixin,
+    # mixins.UpdateModelMixin,
+    # mixins.DestroyModelMixin,
     mixins.ListModelMixin,
     GenericViewSet,
 ):
