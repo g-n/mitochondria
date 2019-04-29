@@ -45,7 +45,7 @@ def index(request):
             for y in x.problems.filter(set_name=x):
                 pa.append([x.set_name, y.target, y.correct, y.incorrect])
         sf = pd.DataFrame(pa, columns=['Problemset','Target','Correct','Incorrect'])\
-            .sort_values(['Problemset'])\
+            .sort_values(['Problemset'])
         context = {
         'scores':df.to_html(index=False, classes=["table-striped"],),
         'problems':sf.to_html(index=False, classes=["table-striped"])
