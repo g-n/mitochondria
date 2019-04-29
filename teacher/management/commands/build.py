@@ -33,13 +33,14 @@ class Command(BaseCommand):
             jimmy.save()
 
             for problem_set in problem_sets:
+                num =  problem_set.problems.count()
                 for _ in range(random.randint(0, 5)):
                     Game.objects.create(
-                        score=random.randint(5, 20),
+                        score=random.randint(5,num),
                         problemset=problem_set,
                         student=jimmy,
                         date=datetime.date.today()
-                        - datetime.timedelta(days=random.randint(0, 10)),
+                        - datetime.timedelta(days=random.choice([2,8,15])),
                     ).save()
 
         c.save()
