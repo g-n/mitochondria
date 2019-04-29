@@ -14,6 +14,7 @@ schema_view = get_schema_view(
     permission_classes=(permissions.IsAuthenticated,),
 )
 
+
 def index(request):
     if not request.user.is_anonymous:
         models.Student.objects.all().values_list()
@@ -31,31 +32,35 @@ def index(request):
 
                     games = models.Game.objects.filter(student=student, problemset=problemset)
                     for game in games:
-                        seta.append([classroom.classroom, student.first_name,student.last_name , problemset.set_name,
-                                    len(ps),
-                                     game.score,
-                                     str(int(round(game.score/len(ps),2 )* 100)) + '%' ,
-                                     game.date])
-        df = pd.DataFrame(seta, columns=['Class', 'First', 'Last', 'Problemset', '# total', 'Score','%', 'Date'])
-        df = df\
-            .sort_values(['Class','Problemset','Last','Date'])
+                        seta.append(
+                            [
+                                classroom.classroom,
+                                student.first_name,
+                                student.last_name,
+                                problemset.set_name,
+                                len(ps),
+                                game.score,
+                                str(int(round(game.score / len(ps), 2) * 100)) + "%",
+                                game.date,
+                            ]
+                        )
+        df = pd.DataFrame(seta, columns=["Class", "First", "Last", "Problemset", "# total", "Score", "%", "Date"])
+        df = df.sort_values(["Class", "Problemset", "Last", "Date"])
 
         pa = []
         for x in problemsets:
             for y in x.problems.filter(set_name=x):
                 pa.append([x.set_name, y.target, y.correct, y.incorrect])
-        sf = pd.DataFrame(pa, columns=['Problemset','Target','Correct','Incorrect'])\
-            .sort_values(['Problemset'])
+        sf = pd.DataFrame(pa, columns=["Problemset", "Target", "Correct", "Incorrect"]).sort_values(["Problemset"])
         context = {
-        'scores':df.to_html(index=False, classes=["table-striped"],),
-        'problems':sf.to_html(index=False, classes=["table-striped"])
-         }
+            "scores": df.to_html(index=False, classes=["table-striped"]),
+            "problems": sf.to_html(index=False, classes=["table-striped"]),
+        }
     else:
-        context = {'scores':'','problems':''}
+        context = {"scores": "", "problems": ""}
 
+    return render(request, "home.html", context)
 
-
-    return render(request, 'home.html', context)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

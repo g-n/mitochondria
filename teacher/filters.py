@@ -21,13 +21,9 @@ class IsOwnerFilterBackend(BaseFilterBackend):
                 return queryset.filter(user=user)
             except FieldError:
                 try:
-                    return queryset.filter(
-                        classroom__in=Class.objects.filter(user=user)
-                    )
+                    return queryset.filter(classroom__in=Class.objects.filter(user=user))
                 except FieldError:
                     try:
-                        return queryset.filter(
-                            problems__in=ProblemSet.objects.filter(user=user)
-                        )
+                        return queryset.filter(problems__in=ProblemSet.objects.filter(user=user))
                     except FieldError:
                         return queryset.filter(student__in=Student.objects.all())

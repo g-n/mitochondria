@@ -13,12 +13,8 @@ import random
 
 class Command(BaseCommand):
     def __init__(self):
-        self.first_names = (
-            open("teacher/fixtures/first_names.txt", "r").read().splitlines()
-        )
-        self.last_names = (
-            open("teacher/fixtures/last_names.txt", "r").read().splitlines()
-        )
+        self.first_names = open("teacher/fixtures/first_names.txt", "r").read().splitlines()
+        self.last_names = open("teacher/fixtures/last_names.txt", "r").read().splitlines()
         super().__init__()
 
     def make_classroom(self, user, name, problem_sets, num_students=10):
@@ -26,21 +22,18 @@ class Command(BaseCommand):
 
         for _ in range(num_students):
             jimmy = Student.objects.create(
-                first_name=random.choice(self.first_names),
-                last_name=random.choice(self.last_names),
-                classroom=c,
+                first_name=random.choice(self.first_names), last_name=random.choice(self.last_names), classroom=c
             )
             jimmy.save()
 
             for problem_set in problem_sets:
-                num =  problem_set.problems.count()
+                num = problem_set.problems.count()
                 for _ in range(random.randint(0, 5)):
                     Game.objects.create(
-                        score=random.randint(5,num),
+                        score=random.randint(5, num),
                         problemset=problem_set,
                         student=jimmy,
-                        date=datetime.date.today()
-                        - datetime.timedelta(days=random.choice([2,8,15])),
+                        date=datetime.date.today() - datetime.timedelta(days=random.choice([2, 8, 15])),
                     ).save()
 
         c.save()
@@ -72,9 +65,7 @@ class Command(BaseCommand):
         call_command("makemigrations", interactive=False)
         call_command("migrate", interactive=False)
 
-        User.objects.create_superuser(
-            username="admin", password="admin", email="a"
-        ).save()
+        User.objects.create_superuser(username="admin", password="admin", email="a").save()
 
         u1 = User.objects.create_user(username="teacher", password="teacher", email="b")
         u1.save()
@@ -93,16 +84,12 @@ class Command(BaseCommand):
         easy_addition = ProblemSet.objects.create(set_name="easy addition", user=u1)
         easy_addition.save()
         for _ in range(20):
-            Problem.objects.create(
-                set_name=easy_addition, **self.gen_problem(10)
-            ).save()
+            Problem.objects.create(set_name=easy_addition, **self.gen_problem(10)).save()
 
         big_number = ProblemSet.objects.create(set_name="large numbers", user=u1)
         big_number.save()
         for _ in range(15):
-            Problem.objects.create(
-                set_name=big_number, **self.gen_problem(500, 100)
-            ).save()
+            Problem.objects.create(set_name=big_number, **self.gen_problem(500, 100)).save()
 
         self.make_classroom(u1, "first grade", [easy_addition, big_number])
         self.make_classroom(u1, "second grade", [easy_addition, big_number])

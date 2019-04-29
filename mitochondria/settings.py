@@ -55,9 +55,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "mitochondria.wsgi.application"
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
@@ -85,23 +83,10 @@ LOGOUT_REDIRECT_URL = "home"
 STATIC_URL = "/static/"
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        '': {
-            'handlers': ['console'],
-            'level': 'INFO',
-        },
-        'django': {
-            'handlers': ['console'],
-            'level': 'INFO',
-        },
-    },
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "loggers": {"": {"handlers": ["console"], "level": "INFO"}, "django": {"handlers": ["console"], "level": "INFO"}},
 }
 
 
@@ -118,6 +103,5 @@ DATABASES = {
     }
 }
 import django_heroku
-django_heroku.settings(locals(), databases=False, )
 
-
+django_heroku.settings(locals(), databases=False)

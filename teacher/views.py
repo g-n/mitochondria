@@ -6,12 +6,7 @@ from rest_framework.response import Response
 
 from .models import Student, Game, ProblemSet, Class
 
-from .serializers import (
-    ClassesSerializer,
-    StudentSerializer,
-    ProblemSetSerializer,
-    GameSerializer,
-)
+from .serializers import ClassesSerializer, StudentSerializer, ProblemSetSerializer, GameSerializer
 
 from .filters import IsOwnerFilterBackend
 from .permissions import IsOwnerOfObject
@@ -27,10 +22,7 @@ class BaseTeacherView(
 ):
     permission_classes = (IsAdminUser | (IsAuthenticated & IsOwnerOfObject),)
     filter_backends = (IsOwnerFilterBackend,)
-    authentication_classes = (
-        BasicAuthentication,
-        SessionAuthentication,
-    )
+    authentication_classes = (BasicAuthentication, SessionAuthentication)
 
 
 class StudentViewSet(BaseTeacherView):
